@@ -1,0 +1,1 @@
+import{h as t,j as e}from"./index-DCB2o80S.js";const n=()=>{const s=t();return e.jsxs("div",{children:["EventGroupPage",e.jsx("div",{children:e.jsx("button",{className:"bg-slate-500",onClick:()=>{s("/")},children:"Home page"})})]})};export{n as default};
