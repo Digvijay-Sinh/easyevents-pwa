@@ -21,7 +21,7 @@ const SearchInput: React.FC<props> = ({ setSearched }) => {
 
       // Make a GET request to fetch categories from the backend
       const response = await axios.get<Category[]>(
-        "http://localhost:5000/api/v1/category"
+        "https://easyeventsbackend-pwa.onrender.com/api/v1/category"
       );
 
       console.log(response.data);

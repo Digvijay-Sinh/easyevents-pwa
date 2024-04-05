@@ -34,7 +34,7 @@ const LongEventCard: React.FC<EventDetailsProps> = ({ event, customKey }) => {
               <div className="posterImage w-full">
                 <img
                   className="rounded-t-lg w-full object-cover object-center aspect-ratio-16-9 "
-                  src={`http://localhost:5000/uploads/${event?.images[0]?.poster_image}`}
+                  src={`https://easyeventsbackend-pwa.onrender.com/uploads/${event?.images[0]?.poster_image}`}
                   alt=""
                 />{" "}
               </div>

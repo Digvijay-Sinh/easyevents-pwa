@@ -35,7 +35,7 @@ const CustomModal: React.FC<LazyCustomModalProps> = ({
 
       // Make a POST request to your backend API endpoint
       const response = await axiosPrivate.post(
-        "http://localhost:5000/api/v1/booking",
+        "https://easyeventsbackend-pwa.onrender.com/api/v1/booking",
         {
           eventId: eventId,
           numberOfTickets: noOfTickets,

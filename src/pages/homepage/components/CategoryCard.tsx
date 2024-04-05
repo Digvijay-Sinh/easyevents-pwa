@@ -13,7 +13,7 @@ const CategoryCard: React.FC<Category> = (category) => {
         <div
           className="absolute backdrop-blur-lg bg-black/100 inset-0 bg-no-repeat bg-center bg-cover rounded-lg"
           style={{
-            backgroundImage: `url(http://localhost:5000/uploads/${category.image})`,
+            backgroundImage: `url(https://easyeventsbackend-pwa.onrender.com/uploads/${category.image})`,
           }}
         />
         <div className="p-5 relative z-10">

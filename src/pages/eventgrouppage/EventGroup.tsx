@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 
 const MessagingPage: React.FC = () => {
   useEffect(() => {
-    // const socket = io("http://localhost:5000");
+    // const socket = io("https://easyeventsbackend-pwa.onrender.com");
     // socket.on("connect", () => {
     //   console.log("Connected to server");
     // });

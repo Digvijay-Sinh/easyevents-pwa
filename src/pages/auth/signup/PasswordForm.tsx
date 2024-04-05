@@ -57,7 +57,7 @@ const PasswordForm: React.FC<Props> = ({ email, setShowPasswordScreen }) => {
     }
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/v1/auth/set-password`,
+        `https://easyeventsbackend-pwa.onrender.com/api/v1/auth/set-password`,
         { email, password, verifyPassword }
       );
       if (res && res.data) {

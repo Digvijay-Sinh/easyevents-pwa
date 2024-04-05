@@ -52,7 +52,7 @@ const EmailForm: React.FC<Props> = ({
     setEmail(email);
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/v1/auth/send-otp`,
+        `https://easyeventsbackend-pwa.onrender.com/api/v1/auth/send-otp`,
         { email, name }
       );
       if (res && res.data) {

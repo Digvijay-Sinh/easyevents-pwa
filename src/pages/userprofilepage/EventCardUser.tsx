@@ -35,7 +35,7 @@ const EventCard = () => {
             <a href="#">
               <img
                 className="rounded-t-lg lg:h-48 md:h-48 h-28 w-full object-cover object-center "
-                src={`http://localhost:5000/uploads/image-1710848396506garba_event.jpg`}
+                src={`https://easyeventsbackend-pwa.onrender.com/uploads/image-1710848396506garba_event.jpg`}
                 alt=""
               />
             </a>

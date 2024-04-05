@@ -147,7 +147,7 @@ const EditEventForm22: React.FC<props> = ({
           imageFormData.append("image", speaker.image[0]);
 
           const imageUploadResponse = await axios.post(
-            "http://localhost:5000/api/v1/imageUpload/upload",
+            "https://easyeventsbackend-pwa.onrender.com/api/v1/imageUpload/upload",
             imageFormData
           );
           toast.success("Image uploaded successfully");
@@ -159,7 +159,7 @@ const EditEventForm22: React.FC<props> = ({
           data.speakers[i].image = imageUrl;
           // log(data.speakers[i].image);
           const formSubmitResponse = await axiosPrivate.put(
-            `http://localhost:5000/api/v1/speakers/${event.speakers[i].id}`,
+            `https://easyeventsbackend-pwa.onrender.com/api/v1/speakers/${event.speakers[i].id}`,
             { speakerData: data.speakers[i] }
           );
           toast.success("Speaker added successfully");
@@ -177,7 +177,7 @@ const EditEventForm22: React.FC<props> = ({
           const { image, ...newResponse } = data.speakers[i];
 
           const formSubmitResponse = await axiosPrivate.put(
-            `http://localhost:5000/api/v1/speakers/${event.speakers[i].id}`,
+            `https://easyeventsbackend-pwa.onrender.com/api/v1/speakers/${event.speakers[i].id}`,
             { speakerData: newResponse }
           );
           toast.success("Speaker added successfully");
@@ -227,7 +227,7 @@ const EditEventForm22: React.FC<props> = ({
   //     const formData = new FormData();
   //     formData.append("image", selectedImage);
   //     const imageUpload = await axios.post(
-  //       "http://localhost:5000/api/v1/imageUpload/upload",
+  //       "https://easyeventsbackend-pwa.onrender.com/api/v1/imageUpload/upload",
   //       formData
   //     );
   //     if (imageUpload.status === 200) {
@@ -389,7 +389,7 @@ const EditEventForm22: React.FC<props> = ({
                                     <div className="posterImage w-3/4 mr-4">
                                       <img
                                         className="rounded-full w-full object-cover object-center aspect-ratio-rounded"
-                                        src={`http://localhost:5000/uploads/${event.speakers[index].image}`}
+                                        src={`https://easyeventsbackend-pwa.onrender.com/uploads/${event.speakers[index].image}`}
                                         alt=""
                                       />{" "}
                                     </div>

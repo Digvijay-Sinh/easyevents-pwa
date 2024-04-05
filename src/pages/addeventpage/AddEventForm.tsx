@@ -147,7 +147,7 @@ const AddEventForm: React.FC<props> = ({
     try {
       // Make a GET request to your backend endpoint using Axios
       const response = await axios.get<Venue[]>(
-        "http://localhost:5000/api/v1/venue"
+        "https://easyeventsbackend-pwa.onrender.com/api/v1/venue"
       );
 
       console.log(response.data);
@@ -183,7 +183,7 @@ const AddEventForm: React.FC<props> = ({
     try {
       // Make a GET request to fetch categories from the backend
       const response = await axios.get<Category[]>(
-        "http://localhost:5000/api/v1/category"
+        "https://easyeventsbackend-pwa.onrender.com/api/v1/category"
       );
 
       console.log(response.data);
@@ -219,7 +219,7 @@ const AddEventForm: React.FC<props> = ({
     try {
       // Make a GET request to fetch types from the backend
       const response = await axios.get<Type[]>(
-        "http://localhost:5000/api/v1/types"
+        "https://easyeventsbackend-pwa.onrender.com/api/v1/types"
       );
 
       console.log(response.data);
@@ -321,7 +321,7 @@ const AddEventForm: React.FC<props> = ({
 
       // Make a POST request to your backend API endpoint
       const response = await axiosPrivate.post(
-        "http://localhost:5000/api/v1/events",
+        "https://easyeventsbackend-pwa.onrender.com/api/v1/events",
         {
           ...data,
           start_date: initialDatetime.toISOString(),
@@ -354,12 +354,15 @@ const AddEventForm: React.FC<props> = ({
       console.log(venues);
       console.log("====================================");
       // Make a POST request to your backend API endpoint
-      const response = await axios.post("http://localhost:5000/api/v1/venue", {
-        ...data,
-        latitude: parseFloat(searchAddress?.lat as string),
-        longitude: parseFloat(searchAddress?.lon as string),
-        postcode: searchAddress?.address.postcode,
-      });
+      const response = await axios.post(
+        "https://easyeventsbackend-pwa.onrender.com/api/v1/venue",
+        {
+          ...data,
+          latitude: parseFloat(searchAddress?.lat as string),
+          longitude: parseFloat(searchAddress?.lon as string),
+          postcode: searchAddress?.address.postcode,
+        }
+      );
       toast.success("Venue added successfully");
 
       console.log("response", response.data.data.id);

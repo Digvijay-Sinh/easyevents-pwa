@@ -64,7 +64,7 @@ const OtpForm: React.FC<Props> = ({
 
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/v1/auth/verify-otp`,
+        `https://easyeventsbackend-pwa.onrender.com/api/v1/auth/verify-otp`,
         { email, otp }
       );
       if (res && res.data) {
@@ -102,7 +102,7 @@ const OtpForm: React.FC<Props> = ({
   const resendOtp = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/v1/auth/resend-otp`,
+        `https://easyeventsbackend-pwa.onrender.com/api/v1/auth/resend-otp`,
         { email }
       );
       if (res && res.data) {

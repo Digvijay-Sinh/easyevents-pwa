@@ -152,7 +152,7 @@ const EventHostedPage = () => {
     try {
       // Make a GET request to fetch categories from the backend
       const response = await axios.get<Event[]>(
-        `http://localhost:5000/api/v1/events/detailed/${eventId}`
+        `https://easyeventsbackend-pwa.onrender.com/api/v1/events/detailed/${eventId}`
       );
 
       console.log(response.data);
@@ -269,7 +269,7 @@ const EventHostedPage = () => {
           <div className="posterImage w-full">
             <img
               className="rounded-t-lg w-full object-cover object-center aspect-ratio-16-9 "
-              src={`http://localhost:5000/uploads/${event?.images[0]?.poster_image}`}
+              src={`https://easyeventsbackend-pwa.onrender.com/uploads/${event?.images[0]?.poster_image}`}
               alt=""
             />{" "}
           </div>
@@ -405,7 +405,7 @@ const EventHostedPage = () => {
                   <div className="posterImage w-1/4 mr-4">
                     <img
                       className="rounded-full w-full object-cover object-center aspect-ratio-rounded"
-                      src={`http://localhost:5000/uploads/${speaker.image}`}
+                      src={`https://easyeventsbackend-pwa.onrender.com/uploads/${speaker.image}`}
                       alt=""
                     />{" "}
                   </div>
@@ -420,7 +420,7 @@ const EventHostedPage = () => {
               <div className="posterImage w-1/4 mr-4">
                 <img
                   className="rounded-full w-full object-cover object-center aspect-ratio-rounded"
-                  src={`http://localhost:5000/uploads/${event?.speakers}`}
+                  src={`https://easyeventsbackend-pwa.onrender.com/uploads/${event?.speakers}`}
                   alt=""
                 />{" "}
               </div>
@@ -589,7 +589,7 @@ const EventHostedPage = () => {
                       >
                         <img
                           className="w-10 h-10 rounded-full"
-                          src={`http://localhost:5000/uploads/${
+                          src={`https://easyeventsbackend-pwa.onrender.com/uploads/${
                             bookingData
                               ? bookingData[i].user.profileImage
                               : "No Image"

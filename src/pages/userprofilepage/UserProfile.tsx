@@ -150,7 +150,7 @@ const UserProfile: React.FC = () => {
           formData.append("image", selectedImage);
 
           const response = await axios.post(
-            "http://localhost:5000/api/v1/imageUpload/upload",
+            "https://easyeventsbackend-pwa.onrender.com/api/v1/imageUpload/upload",
             formData
           );
           toast.success("Image uploaded successfully");
@@ -159,7 +159,7 @@ const UserProfile: React.FC = () => {
 
           const uploadedFileName = response.data.data;
           const formSubmitResponse = await axiosPrivate.post(
-            "http://localhost:5000/api/v1/auth/updateProfileImage",
+            "https://easyeventsbackend-pwa.onrender.com/api/v1/auth/updateProfileImage",
             { filename: uploadedFileName }
           );
           toast.success("Profile image updated successfully");
@@ -290,7 +290,7 @@ const UserProfile: React.FC = () => {
             <div className="posterImage flex flex-col">
               <img
                 className="md:rounded-t-lg rounded-full w-1/2 mx-auto  md:w-full object-cover object-center aspect-ratio-rounded "
-                src={`http://localhost:5000/uploads/${eventsDetails.userData[0]?.profileImage}`}
+                src={`https://easyeventsbackend-pwa.onrender.com/uploads/${eventsDetails.userData[0]?.profileImage}`}
                 alt=""
               />{" "}
               <div className="flex flex-col justify-center items-center">
@@ -391,7 +391,7 @@ const UserProfile: React.FC = () => {
                             <div className="posterImage w-full">
                               <img
                                 className="rounded-t-lg w-full object-cover object-center aspect-ratio-16-9 "
-                                src={`http://localhost:5000/uploads/${booking.booking.event.images[0]?.poster_image}`}
+                                src={`https://easyeventsbackend-pwa.onrender.com/uploads/${booking.booking.event.images[0]?.poster_image}`}
                                 alt=""
                               />{" "}
                             </div>
@@ -445,7 +445,7 @@ const UserProfile: React.FC = () => {
                               </div>
                               <div className="w-[26%] h-full flex justify-end items-end">
                                 <img
-                                  src={`http://localhost:5000/uploads/${booking.booking.qrCodeImageUrl}`}
+                                  src={`https://easyeventsbackend-pwa.onrender.com/uploads/${booking.booking.qrCodeImageUrl}`}
                                   alt="qrcode"
                                 />
                               </div>
@@ -472,7 +472,7 @@ const UserProfile: React.FC = () => {
                           <div className="posterImage w-full">
                             <img
                               className="rounded-t-lg w-full object-cover object-center aspect-ratio-16-9 "
-                              src={`http://localhost:5000/uploads/${event.images[0]?.poster_image}`}
+                              src={`https://easyeventsbackend-pwa.onrender.com/uploads/${event.images[0]?.poster_image}`}
                               alt=""
                             />{" "}
                           </div>

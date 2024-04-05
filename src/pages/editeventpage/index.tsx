@@ -70,7 +70,7 @@ const EditEventPage = () => {
     try {
       // Make a GET request to fetch categories from the backend
       const response = await axios.get<Event[]>(
-        `http://localhost:5000/api/v1/events/detailed/${eventId}`
+        `https://easyeventsbackend-pwa.onrender.com/api/v1/events/detailed/${eventId}`
       );
 
       console.log(response.data);

@@ -117,7 +117,7 @@ const HomePage = () => {
     try {
       // Make a GET request to fetch categories from the backend
       const response = await axios.get<Category[]>(
-        "http://localhost:5000/api/v1/category"
+        "https://easyeventsbackend-pwa.onrender.com/api/v1/category"
       );
 
       console.log(response.data);
@@ -151,7 +151,9 @@ const HomePage = () => {
   useEffect(() => {
     const getAllEvents = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/v1/events");
+        const res = await axios.get(
+          "https://easyeventsbackend-pwa.onrender.com/api/v1/events"
+        );
         if (res && res.status === 200) {
           console.log("==========res data================");
           console.log(res?.data);
@@ -192,7 +194,7 @@ const HomePage = () => {
       try {
         setIsLoadingPaginated(true);
         const response = await axios.get(
-          `http://localhost:5000/api/v1/events/paginated?page=${currentPage}`
+          `https://easyeventsbackend-pwa.onrender.com/api/v1/events/paginated?page=${currentPage}`
         );
         const { data, totalCount } = response.data;
         console.log("====================================");
@@ -440,7 +442,7 @@ const HomePage = () => {
                           setCategoryWise(category.name);
 
                           fetchSearchedAndFilteredEvents(
-                            `http://localhost:5000/api/v1/events/search?category=${category.id}`
+                            `https://easyeventsbackend-pwa.onrender.com/api/v1/events/search?category=${category.id}`
                           );
                         }}
                         className="m-2 cursor-pointer"

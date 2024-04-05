@@ -14,7 +14,7 @@ const ImageForm: React.FC = () => {
       const formData = new FormData();
       formData.append("image", selectedImage);
       const imageUpload = await axios.post(
-        "http://localhost:5000/api/v1/imageUpload/upload",
+        "https://easyeventsbackend-pwa.onrender.com/api/v1/imageUpload/upload",
         formData
       );
       if (imageUpload.status === 200) {
@@ -37,7 +37,7 @@ const ImageForm: React.FC = () => {
   //       const formData = new FormData();
   //       formData.append("image", selectedImage);
   //       const imageUpload = await axios.post(
-  //         "http://localhost:5000/api/v1/imageUpload/upload",
+  //         "https://easyeventsbackend-pwa.onrender.com/api/v1/imageUpload/upload",
   //         formData
   //       );
   //       if (imageUpload.status === 200) {

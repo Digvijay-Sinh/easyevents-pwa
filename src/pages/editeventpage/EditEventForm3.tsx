@@ -90,7 +90,7 @@ const EditEventForm3: React.FC<props> = ({ event }) => {
         formData.append("image", selectedImage);
 
         const response = await axios.post(
-          "http://localhost:5000/api/v1/imageUpload/upload",
+          "https://easyeventsbackend-pwa.onrender.com/api/v1/imageUpload/upload",
           formData
         );
         toast.success("Image uploaded successfully");
@@ -99,7 +99,7 @@ const EditEventForm3: React.FC<props> = ({ event }) => {
 
         const uploadedFileName = response.data.data;
         const formSubmitResponse = await axiosPrivate.put(
-          "http://localhost:5000/api/v1/posterImage",
+          "https://easyeventsbackend-pwa.onrender.com/api/v1/posterImage",
           { eventId: event.id, filename: uploadedFileName }
         );
         toast.success("Poster image added successfully");
@@ -125,7 +125,7 @@ const EditEventForm3: React.FC<props> = ({ event }) => {
   //     const formData = new FormData();
   //     formData.append("image", selectedImage);
   //     const imageUpload = await axios.post(
-  //       "http://localhost:5000/api/v1/imageUpload/upload",
+  //       "https://easyeventsbackend-pwa.onrender.com/api/v1/imageUpload/upload",
   //       formData
   //     );
   //     if (imageUpload.status === 200) {
@@ -190,7 +190,7 @@ const EditEventForm3: React.FC<props> = ({ event }) => {
                   <div className="mt-4">
                     <img
                       className="align-middle"
-                      src={`http://localhost:5000/uploads/${event?.images[0]?.poster_image}`}
+                      src={`https://easyeventsbackend-pwa.onrender.com/uploads/${event?.images[0]?.poster_image}`}
                       alt="Selected"
                       style={{ width: "320px", height: "180px" }}
                     />

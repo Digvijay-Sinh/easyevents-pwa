@@ -81,7 +81,7 @@ const AddEventForm3: React.FC<props> = ({ eventId }) => {
         formData.append("image", selectedImage);
 
         const response = await axios.post(
-          "http://localhost:5000/api/v1/imageUpload/upload",
+          "https://easyeventsbackend-pwa.onrender.com/api/v1/imageUpload/upload",
           formData
         );
         toast.success("Image uploaded successfully");
@@ -90,7 +90,7 @@ const AddEventForm3: React.FC<props> = ({ eventId }) => {
 
         const uploadedFileName = response.data.data;
         const formSubmitResponse = await axios.post(
-          "http://localhost:5000/api/v1/posterImage",
+          "https://easyeventsbackend-pwa.onrender.com/api/v1/posterImage",
           { eventId: eventId, filename: uploadedFileName }
         );
         toast.success("Poster image added successfully");
@@ -118,7 +118,7 @@ const AddEventForm3: React.FC<props> = ({ eventId }) => {
   //     const formData = new FormData();
   //     formData.append("image", selectedImage);
   //     const imageUpload = await axios.post(
-  //       "http://localhost:5000/api/v1/imageUpload/upload",
+  //       "https://easyeventsbackend-pwa.onrender.com/api/v1/imageUpload/upload",
   //       formData
   //     );
   //     if (imageUpload.status === 200) {

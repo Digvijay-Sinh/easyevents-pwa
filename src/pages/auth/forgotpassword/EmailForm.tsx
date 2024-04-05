@@ -46,7 +46,7 @@ const EmailForm: React.FC<Props> = ({
     setEmail(email);
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/v1/auth/forgot-password`,
+        `https://easyeventsbackend-pwa.onrender.com/api/v1/auth/forgot-password`,
         { email }
       );
       if (res && res.data) {

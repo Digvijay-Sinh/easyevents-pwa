@@ -51,7 +51,7 @@ const LoginForm = () => {
     try {
       const { email, password } = data;
       const res = await axios.post(
-        "http://localhost:5000/api/v1/auth/login",
+        "https://easyeventsbackend-pwa.onrender.com/api/v1/auth/login",
         JSON.stringify({ email, password }),
         {
           headers: { "Content-Type": "application/json" },

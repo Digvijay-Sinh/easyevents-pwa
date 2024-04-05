@@ -61,7 +61,7 @@ const SearchBar: React.FC<props> = ({
     try {
       // Make a GET request to fetch categories from the backend
       const response = await axios.get<Category[]>(
-        "http://localhost:5000/api/v1/category"
+        "https://easyeventsbackend-pwa.onrender.com/api/v1/category"
       );
 
       console.log(response.data);
@@ -133,7 +133,7 @@ const SearchBar: React.FC<props> = ({
         return;
       }
       setSearched(true);
-      const apiUrl = `http://localhost:5000/api/v1/events/search?search=${searchTerm}&startDate=${value.startDate}&endDate=${value.endDate}&category=${category}`;
+      const apiUrl = `https://easyeventsbackend-pwa.onrender.com/api/v1/events/search?search=${searchTerm}&startDate=${value.startDate}&endDate=${value.endDate}&category=${category}`;
       console.log(apiUrl);
       fetchSearchedAndFilteredEvents(apiUrl);
       setTimeout(() => {
@@ -149,7 +149,7 @@ const SearchBar: React.FC<props> = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     setSearched(true);
-    const apiUrl = `http://localhost:5000/api/v1/events/search?search=${searchTerm}&startDate=${value.startDate}&endDate=${value.endDate}&category=${category}`;
+    const apiUrl = `https://easyeventsbackend-pwa.onrender.com/api/v1/events/search?search=${searchTerm}&startDate=${value.startDate}&endDate=${value.endDate}&category=${category}`;
     console.log(apiUrl);
     fetchSearchedAndFilteredEvents(apiUrl);
     setTimeout(() => {
@@ -166,7 +166,7 @@ const SearchBar: React.FC<props> = ({
     if (!searched) {
       return;
     }
-    const apiUrl = `http://localhost:5000/api/v1/events/search?search=${searchTerm}&startDate=${value.startDate}&endDate=${value.endDate}&category=${category}`;
+    const apiUrl = `https://easyeventsbackend-pwa.onrender.com/api/v1/events/search?search=${searchTerm}&startDate=${value.startDate}&endDate=${value.endDate}&category=${category}`;
     console.log("=========apiURL====================");
     console.log(apiUrl);
     console.log("====================================");

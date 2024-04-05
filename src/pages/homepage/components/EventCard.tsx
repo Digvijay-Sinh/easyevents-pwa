@@ -36,7 +36,7 @@ const EventCard: React.FC<EventDetailsProps> = ({ event, customKey }) => {
             <a href="#">
               <img
                 className="rounded-t-lg lg:h-48 md:h-48 h-28 w-full object-cover object-center "
-                src={`http://localhost:5000/uploads/${event.images[0]?.poster_image}`}
+                src={`https://easyeventsbackend-pwa.onrender.com/uploads/${event.images[0]?.poster_image}`}
                 alt=""
               />
             </a>

@@ -49,7 +49,9 @@ const DemoAddEvent = () => {
 
   const getEvents = async () => {
     try {
-      const response = await axios("http://localhost:5000/api/v1/events");
+      const response = await axios(
+        "https://easyeventsbackend-pwa.onrender.com/api/v1/events"
+      );
       const data = await response.data;
       setEvents(data);
       console.log("Events:", data);
@@ -90,13 +92,16 @@ const DemoAddEvent = () => {
         end_date_toRegister: new Date(data.end_date_toRegister).toISOString(),
       };
 
-      const response = await fetch("http://localhost:5000/createEvent", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(transformedData),
-      });
+      const response = await fetch(
+        "https://easyeventsbackend-pwa.onrender.com/createEvent",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(transformedData),
+        }
+      );
       const responseData = await response.json();
       console.log("Event created:", responseData);
       // Optionally, redirect to another page or display a success message
