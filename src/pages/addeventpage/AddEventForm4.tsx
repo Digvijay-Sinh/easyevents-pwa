@@ -43,7 +43,7 @@ const schema = yup.object().shape({
   price: yup
     .number()
     .required("Ticket Price is required")
-    .transform((originalValue) => parseFloat(originalValue).toFixed(2)),
+    .transform((value, originalValue) => parseFloat(originalValue).toFixed(2)),
   organizer_id: yup.number().required("Organizer ID is required"),
   venue_id: yup.number().required("Venue ID is required"),
   category_id: yup.number().required("Category ID is required"),

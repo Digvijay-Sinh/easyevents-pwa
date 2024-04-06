@@ -1,13 +1,13 @@
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import DemoAddEvent from "./DemoAddEvent";
 import AddEventForm from "./AddEventForm";
 import { useState } from "react";
 import AddEventForm22 from "./AddEventForm22";
 import AddEventForm3 from "./AddEventForm3";
-// import AddEventForm4 from "./AddEventForm4";
+import AddEventForm4 from "./AddEventForm4";
 
 const AddEventPage = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [eventId, setEventId] = useState(0); // [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
   const [showForm1, setShowForm1] = useState(true);
   const [showForm2, setShowForm2] = useState(false);
@@ -63,6 +63,19 @@ const AddEventPage = () => {
         />
       );
     }
+    // if (!showForm1 && !showForm2 && !showForm3 && showForm4) {
+    //   return <AddEventForm4
+    //   eventId={eventId}
+    //   setEventId={setEventId}
+    //   showForm1={showForm1}
+    //   showForm2={showForm2}
+    //   showForm3={showForm3}
+    //   showForm4={showForm4}
+    //   setShowForm1={setShowForm1}
+    //   setShowForm2={setShowForm2}
+    //   setShowForm3={setShowForm3}
+    //   setShowForm4={setShowForm4}/>;
+    // }
   };
 
   return (

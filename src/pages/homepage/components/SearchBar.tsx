@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 import { Event } from "../../homepage/index";
+import { set } from "react-hook-form";
 
 interface DateRangeState {
   startDate: string;
@@ -25,6 +26,7 @@ type props = {
 };
 
 const SearchBar: React.FC<props> = ({
+  isLoadingSearch,
   setIsLoadingSearch,
   searched,
   setSearched,

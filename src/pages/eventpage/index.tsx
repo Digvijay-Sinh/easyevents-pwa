@@ -1,5 +1,6 @@
-import { useParams } from "react-router-dom";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { useNavigate, useParams } from "react-router-dom";
+import posterImage from "../../assets/events/aleksandr-popov-hTv8aaPziOQ-unsplash.jpg";
+import { FaMapMarkerAlt, FaTimes } from "react-icons/fa";
 import { MdDateRange } from "react-icons/md";
 import { Button } from "flowbite-react";
 import { RiAccountCircleFill } from "react-icons/ri";
@@ -86,6 +87,7 @@ export interface Event {
 }
 
 const EventPage = () => {
+  const navigate = useNavigate();
   const [selectPosition, setSelectPosition] = useState<LatLngExpression | null>(
     null
   );
@@ -210,9 +212,9 @@ const EventPage = () => {
           {" "}
           <span className="text-xs flex items-center gap-2 mb-1 md:text-sm text-gray-300 m-0">
             <IoTimeSharp className="text-yellow-300 text-base" />
-            Registration{" "}
-            {convertedEventDate(event?.start_date_toRegister as string)}-{" "}
-            {convertedEventDate(event?.end_date_toRegister as string)}
+            Registration {convertedEventDate(
+              event?.start_date_toRegister
+            )}- {convertedEventDate(event?.end_date_toRegister)}
           </span>
         </div>
       </div>
@@ -243,7 +245,7 @@ const EventPage = () => {
             <div className="flex flex-col">
               {" "}
               <span className="text-sm   md:text-base text-white m-0">
-                {convertedEventDate(event?.start_date as string)}
+                {convertedEventDate(event?.start_date)}
               </span>
               {/* <span className="text-sm   md:text-base text-white m-0">
                 {event?.end_date}
@@ -253,7 +255,7 @@ const EventPage = () => {
             <div className="flex flex-col">
               {" "}
               <span className="text-sm   md:text-base text-white m-0">
-                {convertedEventDate(event?.end_date as string)}
+                {convertedEventDate(event?.end_date)}
               </span>
               {/* <span className="text-sm   md:text-base text-white m-0">
                 15:21:00{" "}
@@ -293,10 +295,10 @@ const EventPage = () => {
                   if (auth && auth?.accessToken) {
                     const currentDate = new Date();
                     const startDateToRegister = new Date(
-                      event?.start_date_toRegister as string
+                      event?.start_date_toRegister
                     );
                     const endDateToRegister = new Date(
-                      event?.end_date_toRegister as string
+                      event?.end_date_toRegister
                     );
 
                     console.log("====================================");
@@ -436,8 +438,8 @@ const EventPage = () => {
                   setBooked={setBooked}
                   handleOpenModal={handleOpenModal}
                   handleCloseModal={handleCloseModal}
-                  eventId={event?.id as number}
-                  eventPrice={event?.price as number}
+                  eventId={event?.id}
+                  eventPrice={event?.price}
                 />
               </div>
             )}

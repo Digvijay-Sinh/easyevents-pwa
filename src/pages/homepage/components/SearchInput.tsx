@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Dropdown } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 interface Category {
@@ -10,15 +11,13 @@ type props = {
   searched: boolean;
   setSearched: React.Dispatch<React.SetStateAction<boolean>>;
 };
-const SearchInput: React.FC<props> = ({ setSearched }) => {
+const SearchInput: React.FC<props> = ({ searched, setSearched }) => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [category, setCategory] = useState<number>();
   const [searchTerm, setSearchTerm] = useState("");
 
   const fetchCategories = async () => {
     try {
-      console.log(category);
-
       // Make a GET request to fetch categories from the backend
       const response = await axios.get<Category[]>(
         "https://easyeventsbackend-pwa.onrender.com/api/v1/category"

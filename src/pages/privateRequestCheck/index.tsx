@@ -28,11 +28,9 @@ const PrivateRequestPage = () => {
           <h2>events List</h2>
           {events?.length ? (
             <ul>
-              {events.map((user, i) => {
-                console.log(user);
-
-                return <li key={i}>{i}</li>;
-              })}
+              {events.map((user, i) => (
+                <li key={i}>{i}</li>
+              ))}
             </ul>
           ) : (
             <p>No events to display</p>

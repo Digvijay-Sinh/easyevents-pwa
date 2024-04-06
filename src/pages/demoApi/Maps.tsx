@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L, { LatLngExpression } from "leaflet";
@@ -7,7 +7,7 @@ interface MapsProps {
 }
 
 const icon = L.icon({
-  iconUrl: "http://localhost:5173/placeholder.png",
+  iconUrl: "https://easyevents-pwa-updated.vercel.app/placeholder.png",
   iconSize: [38, 38],
 });
 

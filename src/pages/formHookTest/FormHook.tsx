@@ -1,3 +1,4 @@
+import React from "react";
 import { FieldErrors, useFieldArray, useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
@@ -32,13 +33,24 @@ const FormHook = () => {
     },
   });
 
-  const { register, control, handleSubmit, formState, watch } = form;
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState,
+    watch,
+    getValues,
+    setValue,
+    reset,
+  } = form;
   const {
     errors,
-
+    dirtyFields,
+    touchedFields,
     isValid,
     isDirty,
-
+    isSubmitSuccessful,
+    isSubmitted,
     isSubmitting,
   } = formState;
   const { fields, append, remove } = useFieldArray({
@@ -121,8 +133,6 @@ const FormHook = () => {
         </div>
         <div>
           {fields.map((field, index) => {
-            console.log(field);
-
             return (
               <>
                 <div>

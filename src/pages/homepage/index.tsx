@@ -11,7 +11,9 @@ import SearchBar from "./components/SearchBar";
 import toast from "react-hot-toast";
 import CategoryCard from "./components/CategoryCard";
 import LongEventCard from "./components/LongEventCard";
+import Loader from "../../components/Loader";
 import { Pagination } from "flowbite-react";
+import { set } from "react-hook-form";
 
 const LazyCustomModal = lazy(() => import("./components/UserInterestModal"));
 
@@ -304,6 +306,30 @@ const HomePage = () => {
     };
   }, [auth]);
 
+  const dummyEvent = {
+    id: 2,
+    title: "ttrtrtrr",
+    description: "rtrtrrt",
+    start_date: "2024-03-09T13:24:00.000Z",
+    end_date: "2024-03-10T13:24:00.000Z",
+    start_date_toRegister: "2024-03-01T13:24:00.000Z",
+    end_date_toRegister: "2024-03-02T13:24:00.000Z",
+    mode: "ONLINE",
+    capacity: 333,
+    price: 33,
+    organizer_id: 1,
+    venue_id: 1,
+    category_id: 17,
+    type_id: 14,
+    images: [
+      {
+        id: 1,
+        poster_image: "image-1710768313757Untitled.png",
+        event_id: 2,
+      },
+    ],
+  };
+
   useEffect(() => {
     setModalOpen(true);
 
@@ -313,364 +339,43 @@ const HomePage = () => {
   }, []);
 
   return (
-    <>
-      <div
-        style={{
-          background:
-            "linear-gradient(142deg, rgba(86,31,41,1) 0%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 75%, rgba(86,31,41,1) 100%)",
-        }}
-        className=""
-      >
-        <Hero />
-        <div className="cardContainer   ">
-          <div>
-            <SearchBar
-              isLoadingSearch={isLoadingSearch}
-              setIsLoadingSearch={setIsLoadingSearch}
-              searchedEvents={searchedEvents}
-              setSearchedEvents={setSearchedEvents}
-              searched={searched}
-              setSearched={setSearched}
-            />
-          </div>
+    <div
+      style={{
+        background:
+          "linear-gradient(142deg, rgba(86,31,41,1) 0%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 75%, rgba(86,31,41,1) 100%)",
+      }}
+      className=""
+    >
+      <Hero />
+      <div className="cardContainer   ">
+        <div>
+          <SearchBar
+            isLoadingSearch={isLoadingSearch}
+            setIsLoadingSearch={setIsLoadingSearch}
+            searchedEvents={searchedEvents}
+            setSearchedEvents={setSearchedEvents}
+            searched={searched}
+            setSearched={setSearched}
+          />
+        </div>
 
-          {searched && (
-            <div className="min-h-44">
-              <div className="mt-10">
-                <h1 className="text-xl my-2 font-bold leading-tight tracking-tight  md:text-2xl text-white text-center">
-                  Search Results <br />
-                </h1>
-              </div>
-              {searched && isLoadingSearch && (
-                <div className="flex justify-center w-full mt-10">
-                  <div className="loader animate-spin rounded-full border-t-4 border-b-4 border-white h-12 w-12"></div>
-                </div>
-              )}
-              {searched && !isLoadingSearch && (
-                <>
-                  <div className="flex flex-wrap ">
-                    {searchedEvents.length > 0 ? (
-                      searchedEvents.map((event) => {
-                        return (
-                          <LongEventCard customKey={event.id} event={event} />
-                        );
-                      })
-                    ) : (
-                      <div className="flex justify-center w-full">
-                        <h1 className="text-white text-2xl text-center">
-                          Oops! No events found
-                        </h1>
-                      </div>
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
-          )}
-
-          {/* Popular categories */}
-          <div>
+        {searched && (
+          <div className="min-h-44">
             <div className="mt-10">
               <h1 className="text-xl my-2 font-bold leading-tight tracking-tight  md:text-2xl text-white text-center">
-                Popular categories <br />
+                Search Results <br />
               </h1>
             </div>
-            <div>
-              <Carousel
-                additionalTransfrom={0}
-                arrows
-                autoPlaySpeed={3000}
-                centerMode={true}
-                className="flex gap-2"
-                containerClass="container-with-dots"
-                dotListClass=""
-                draggable
-                focusOnSelect={false}
-                infinite
-                itemClass=""
-                keyBoardControl
-                minimumTouchDrag={80}
-                pauseOnHover
-                renderArrowsWhenDisabled={false}
-                renderButtonGroupOutside={false}
-                renderDotsOutside={false}
-                responsive={{
-                  desktop: {
-                    breakpoint: {
-                      max: 3000,
-                      min: 1024,
-                    },
-                    items: 3,
-                    partialVisibilityGutter: 40,
-                    slidesToSlide: 3,
-                  },
-                  mobile: {
-                    breakpoint: {
-                      max: 464,
-                      min: 0,
-                    },
-                    items: 1,
-                    partialVisibilityGutter: 30,
-                    slidesToSlide: 1,
-                  },
-                  tablet: {
-                    breakpoint: {
-                      max: 1024,
-                      min: 464,
-                    },
-                    items: 2,
-                    partialVisibilityGutter: 30,
-                    slidesToSlide: 2,
-                  },
-                }}
-                rewind={false}
-                rewindWithAnimation={false}
-                rtl={false}
-                shouldResetAutoplay
-                showDots={false}
-                sliderClass=""
-                slidesToSlide={1}
-                swipeable
-              >
-                {categories?.map((category, index) => {
-                  if (category.image != "") {
-                    console.log(index);
-
-                    return (
-                      <div
-                        onClick={() => {
-                          setCategoryWise(category.name);
-
-                          fetchSearchedAndFilteredEvents(
-                            `https://easyeventsbackend-pwa.onrender.com/api/v1/events/search?category=${category.id}`
-                          );
-                        }}
-                        className="m-2 cursor-pointer"
-                      >
-                        <CategoryCard
-                          id={category.id}
-                          image={category.image}
-                          name={category.name}
-                        />
-                      </div>
-                    );
-                  }
-                })}
-              </Carousel>
-            </div>
-          </div>
-          {categoryWise != "" && (
-            <div>
-              <div className="mt-10">
-                <h1 className="text-xl my-2 font-bold leading-tight tracking-tight  md:text-2xl text-white text-center">
-                  Selected {categoryWise} <br />
-                </h1>
+            {searched && isLoadingSearch && (
+              <div className="flex justify-center w-full mt-10">
+                <div className="loader animate-spin rounded-full border-t-4 border-b-4 border-white h-12 w-12"></div>
               </div>
-
-              <div className="flex flex-wrap ">
-                {categoryWiseEvents.length > 0 ? (
-                  categoryWiseEvents.map((event) => {
-                    return <LongEventCard customKey={event.id} event={event} />;
-                  })
-                ) : (
-                  <div className="flex justify-center w-full">
-                    <h1 className="text-white text-2xl text-center">
-                      Oops! No events found
-                    </h1>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-          {
-            <>
-              {/* Based on interest */}
-              <div>
-                <div className="mt-10">
-                  <h1 className="text-xl my-2 font-bold leading-tight tracking-tight  md:text-2xl text-white text-center">
-                    Recommended Events <br />
-                    <span className="text sm:text-base text-[0.75rem] text-gray-400">
-                      Based on your interests
-                    </span>
-                  </h1>
-                </div>
-                <div>
-                  <Carousel
-                    additionalTransfrom={0}
-                    arrows
-                    autoPlaySpeed={3000}
-                    centerMode={true}
-                    className="flex gap-2"
-                    containerClass="container-with-dots"
-                    dotListClass=""
-                    draggable
-                    focusOnSelect={false}
-                    infinite
-                    itemClass=""
-                    keyBoardControl
-                    minimumTouchDrag={80}
-                    pauseOnHover
-                    renderArrowsWhenDisabled={false}
-                    renderButtonGroupOutside={false}
-                    renderDotsOutside={false}
-                    responsive={{
-                      desktop: {
-                        breakpoint: {
-                          max: 3000,
-                          min: 1024,
-                        },
-                        items: 3,
-                        partialVisibilityGutter: 40,
-                        slidesToSlide: 3,
-                      },
-                      mobile: {
-                        breakpoint: {
-                          max: 464,
-                          min: 0,
-                        },
-                        items: 1,
-                        partialVisibilityGutter: 30,
-                        slidesToSlide: 1,
-                      },
-                      tablet: {
-                        breakpoint: {
-                          max: 1024,
-                          min: 464,
-                        },
-                        items: 2,
-                        partialVisibilityGutter: 30,
-                        slidesToSlide: 2,
-                      },
-                    }}
-                    rewind={false}
-                    rewindWithAnimation={false}
-                    rtl={false}
-                    shouldResetAutoplay
-                    showDots={false}
-                    sliderClass=""
-                    slidesToSlide={1}
-                    swipeable
-                  >
-                    {recommendedBasedOnInterests.length > 0 &&
-                      recommendedBasedOnInterests?.map((event, index) => {
-                        return (
-                          <div className="m-2">
-                            <EventCard customKey={index} event={event} />
-                          </div>
-                        );
-                      })}
-                    {recommendedBasedOnInterests.length === 0 &&
-                      events?.map((event, index) => {
-                        return (
-                          <div className="m-2">
-                            <EventCard customKey={index} event={event} />
-                          </div>
-                        );
-                      })}
-                  </Carousel>
-                </div>
-              </div>
-              {/* Based on location */}
-              <div>
-                <div className="mt-10">
-                  <h1 className="text-xl my-2 font-bold leading-tight tracking-tight  md:text-2xl text-white text-center">
-                    Most popular events <br />
-                    {/* <span className="text sm:text-base text-[0.75rem] text-gray-400">
-                    Based on your location
-                  </span> */}
-                  </h1>
-                </div>
-                <div>
-                  <Carousel
-                    additionalTransfrom={0}
-                    arrows
-                    autoPlaySpeed={3000}
-                    centerMode={true}
-                    className="flex gap-2"
-                    containerClass="container-with-dots"
-                    dotListClass=""
-                    draggable
-                    focusOnSelect={false}
-                    infinite
-                    itemClass=""
-                    keyBoardControl
-                    minimumTouchDrag={80}
-                    pauseOnHover
-                    renderArrowsWhenDisabled={false}
-                    renderButtonGroupOutside={false}
-                    renderDotsOutside={false}
-                    responsive={{
-                      desktop: {
-                        breakpoint: {
-                          max: 3000,
-                          min: 1024,
-                        },
-                        items: 3,
-                        partialVisibilityGutter: 40,
-                        slidesToSlide: 3,
-                      },
-                      mobile: {
-                        breakpoint: {
-                          max: 464,
-                          min: 0,
-                        },
-                        items: 1,
-                        partialVisibilityGutter: 30,
-                        slidesToSlide: 1,
-                      },
-                      tablet: {
-                        breakpoint: {
-                          max: 1024,
-                          min: 464,
-                        },
-                        items: 2,
-                        partialVisibilityGutter: 30,
-                        slidesToSlide: 2,
-                      },
-                    }}
-                    rewind={false}
-                    rewindWithAnimation={false}
-                    rtl={false}
-                    shouldResetAutoplay
-                    showDots={false}
-                    sliderClass=""
-                    slidesToSlide={1}
-                    swipeable
-                  >
-                    {events?.map((event, index) => {
-                      return (
-                        <div className="m-2">
-                          <EventCard customKey={index} event={event} />
-                        </div>
-                      );
-                    })}
-                  </Carousel>
-                </div>
-              </div>
-            </>
-          }
-        </div>
-        <div>
-          <div className="mt-10">
-            <h1 className="text-xl my-2 font-bold leading-tight tracking-tight  md:text-2xl text-white text-center">
-              Trending events <br />
-              {/* <span className="text sm:text-base text-[0.75rem] text-gray-400">
-                    Based on your location
-                  </span> */}
-            </h1>
-          </div>
-          {isLoadingPaginated && (
-            <div className="flex justify-center w-full min-h-48 mt-10">
-              <div className="loader animate-spin rounded-full border-t-4 border-b-4 border-white h-12 w-12"></div>
-            </div>
-          )}
-
-          {!isLoadingPaginated && (
-            <div>
+            )}
+            {searched && !isLoadingSearch && (
               <>
                 <div className="flex flex-wrap ">
-                  {paginatedEvents.length > 0 ? (
-                    paginatedEvents.map((event) => {
+                  {searchedEvents.length > 0 ? (
+                    searchedEvents.map((event) => {
                       return (
                         <LongEventCard customKey={event.id} event={event} />
                       );
@@ -683,39 +388,354 @@ const HomePage = () => {
                     </div>
                   )}
                 </div>
-                <div className="flex overflow-x-auto justify-center sm:justify-center dark">
-                  <Pagination
-                    previousLabel={"<"}
-                    nextLabel=">"
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={onPageChange}
-                  />
-                </div>
               </>
-            </div>
-          )}
+            )}
+          </div>
+        )}
+
+        {/* Popular categories */}
+        <div>
+          <div className="mt-10">
+            <h1 className="text-xl my-2 font-bold leading-tight tracking-tight  md:text-2xl text-white text-center">
+              Popular categories <br />
+            </h1>
+          </div>
+          <div>
+            <Carousel
+              additionalTransfrom={0}
+              arrows
+              autoPlaySpeed={3000}
+              centerMode={true}
+              className="flex gap-2"
+              containerClass="container-with-dots"
+              dotListClass=""
+              draggable
+              focusOnSelect={false}
+              infinite
+              itemClass=""
+              keyBoardControl
+              minimumTouchDrag={80}
+              pauseOnHover
+              renderArrowsWhenDisabled={false}
+              renderButtonGroupOutside={false}
+              renderDotsOutside={false}
+              responsive={{
+                desktop: {
+                  breakpoint: {
+                    max: 3000,
+                    min: 1024,
+                  },
+                  items: 3,
+                  partialVisibilityGutter: 40,
+                  slidesToSlide: 3,
+                },
+                mobile: {
+                  breakpoint: {
+                    max: 464,
+                    min: 0,
+                  },
+                  items: 1,
+                  partialVisibilityGutter: 30,
+                  slidesToSlide: 1,
+                },
+                tablet: {
+                  breakpoint: {
+                    max: 1024,
+                    min: 464,
+                  },
+                  items: 2,
+                  partialVisibilityGutter: 30,
+                  slidesToSlide: 2,
+                },
+              }}
+              rewind={false}
+              rewindWithAnimation={false}
+              rtl={false}
+              shouldResetAutoplay
+              showDots={false}
+              sliderClass=""
+              slidesToSlide={1}
+              swipeable
+            >
+              {categories?.map((category, index) => {
+                if (category.image != "") {
+                  return (
+                    <div
+                      onClick={() => {
+                        setCategoryWise(category.name);
+
+                        fetchSearchedAndFilteredEvents(
+                          `https://easyeventsbackend-pwa.onrender.com/api/v1/events/search?category=${category.id}`
+                        );
+                      }}
+                      className="m-2 cursor-pointer"
+                    >
+                      <CategoryCard
+                        id={category.id}
+                        image={category.image}
+                        name={category.name}
+                      />
+                    </div>
+                  );
+                }
+              })}
+            </Carousel>
+          </div>
         </div>
-        {!auth?.accessToken && (
-          <div className="">
-            <Suspense fallback={<h2>Loading...</h2>}>
-              {modalOpen && (
-                <div className="fixed inset-0 backdrop-filter backdrop-blur-lg">
-                  <LazyCustomModal
-                    modalOpen={modalOpen}
-                    handleOpenModal={handleOpenModal}
-                    handleCloseModal={handleCloseModal}
-                    categories={categories}
-                    setUserInterests={setUserInterests}
-                    userInterests={userInterests}
-                  />
+        {categoryWise != "" && (
+          <div>
+            <div className="mt-10">
+              <h1 className="text-xl my-2 font-bold leading-tight tracking-tight  md:text-2xl text-white text-center">
+                Selected {categoryWise} <br />
+              </h1>
+            </div>
+
+            <div className="flex flex-wrap ">
+              {categoryWiseEvents.length > 0 ? (
+                categoryWiseEvents.map((event) => {
+                  return <LongEventCard customKey={event.id} event={event} />;
+                })
+              ) : (
+                <div className="flex justify-center w-full">
+                  <h1 className="text-white text-2xl text-center">
+                    Oops! No events found
+                  </h1>
                 </div>
               )}
-            </Suspense>
+            </div>
+          </div>
+        )}
+        {
+          <>
+            {/* Based on interest */}
+            <div>
+              <div className="mt-10">
+                <h1 className="text-xl my-2 font-bold leading-tight tracking-tight  md:text-2xl text-white text-center">
+                  Recommended Events <br />
+                  <span className="text sm:text-base text-[0.75rem] text-gray-400">
+                    Based on your interests
+                  </span>
+                </h1>
+              </div>
+              <div>
+                <Carousel
+                  additionalTransfrom={0}
+                  arrows
+                  autoPlaySpeed={3000}
+                  centerMode={true}
+                  className="flex gap-2"
+                  containerClass="container-with-dots"
+                  dotListClass=""
+                  draggable
+                  focusOnSelect={false}
+                  infinite
+                  itemClass=""
+                  keyBoardControl
+                  minimumTouchDrag={80}
+                  pauseOnHover
+                  renderArrowsWhenDisabled={false}
+                  renderButtonGroupOutside={false}
+                  renderDotsOutside={false}
+                  responsive={{
+                    desktop: {
+                      breakpoint: {
+                        max: 3000,
+                        min: 1024,
+                      },
+                      items: 3,
+                      partialVisibilityGutter: 40,
+                      slidesToSlide: 3,
+                    },
+                    mobile: {
+                      breakpoint: {
+                        max: 464,
+                        min: 0,
+                      },
+                      items: 1,
+                      partialVisibilityGutter: 30,
+                      slidesToSlide: 1,
+                    },
+                    tablet: {
+                      breakpoint: {
+                        max: 1024,
+                        min: 464,
+                      },
+                      items: 2,
+                      partialVisibilityGutter: 30,
+                      slidesToSlide: 2,
+                    },
+                  }}
+                  rewind={false}
+                  rewindWithAnimation={false}
+                  rtl={false}
+                  shouldResetAutoplay
+                  showDots={false}
+                  sliderClass=""
+                  slidesToSlide={1}
+                  swipeable
+                >
+                  {recommendedBasedOnInterests.length > 0 &&
+                    recommendedBasedOnInterests?.map((event, index) => {
+                      return (
+                        <div className="m-2">
+                          <EventCard customKey={index} event={event} />
+                        </div>
+                      );
+                    })}
+                  {recommendedBasedOnInterests.length === 0 &&
+                    events?.map((event, index) => {
+                      return (
+                        <div className="m-2">
+                          <EventCard customKey={index} event={event} />
+                        </div>
+                      );
+                    })}
+                </Carousel>
+              </div>
+            </div>
+            {/* Based on location */}
+            <div>
+              <div className="mt-10">
+                <h1 className="text-xl my-2 font-bold leading-tight tracking-tight  md:text-2xl text-white text-center">
+                  Most popular events <br />
+                  {/* <span className="text sm:text-base text-[0.75rem] text-gray-400">
+                    Based on your location
+                  </span> */}
+                </h1>
+              </div>
+              <div>
+                <Carousel
+                  additionalTransfrom={0}
+                  arrows
+                  autoPlaySpeed={3000}
+                  centerMode={true}
+                  className="flex gap-2"
+                  containerClass="container-with-dots"
+                  dotListClass=""
+                  draggable
+                  focusOnSelect={false}
+                  infinite
+                  itemClass=""
+                  keyBoardControl
+                  minimumTouchDrag={80}
+                  pauseOnHover
+                  renderArrowsWhenDisabled={false}
+                  renderButtonGroupOutside={false}
+                  renderDotsOutside={false}
+                  responsive={{
+                    desktop: {
+                      breakpoint: {
+                        max: 3000,
+                        min: 1024,
+                      },
+                      items: 3,
+                      partialVisibilityGutter: 40,
+                      slidesToSlide: 3,
+                    },
+                    mobile: {
+                      breakpoint: {
+                        max: 464,
+                        min: 0,
+                      },
+                      items: 1,
+                      partialVisibilityGutter: 30,
+                      slidesToSlide: 1,
+                    },
+                    tablet: {
+                      breakpoint: {
+                        max: 1024,
+                        min: 464,
+                      },
+                      items: 2,
+                      partialVisibilityGutter: 30,
+                      slidesToSlide: 2,
+                    },
+                  }}
+                  rewind={false}
+                  rewindWithAnimation={false}
+                  rtl={false}
+                  shouldResetAutoplay
+                  showDots={false}
+                  sliderClass=""
+                  slidesToSlide={1}
+                  swipeable
+                >
+                  {events?.map((event, index) => {
+                    return (
+                      <div className="m-2">
+                        <EventCard customKey={index} event={event} />
+                      </div>
+                    );
+                  })}
+                </Carousel>
+              </div>
+            </div>
+          </>
+        }
+      </div>
+      <div>
+        <div className="mt-10">
+          <h1 className="text-xl my-2 font-bold leading-tight tracking-tight  md:text-2xl text-white text-center">
+            Trending events <br />
+            {/* <span className="text sm:text-base text-[0.75rem] text-gray-400">
+                    Based on your location
+                  </span> */}
+          </h1>
+        </div>
+        {isLoadingPaginated && (
+          <div className="flex justify-center w-full min-h-48 mt-10">
+            <div className="loader animate-spin rounded-full border-t-4 border-b-4 border-white h-12 w-12"></div>
+          </div>
+        )}
+
+        {!isLoadingPaginated && (
+          <div>
+            <>
+              <div className="flex flex-wrap ">
+                {paginatedEvents.length > 0 ? (
+                  paginatedEvents.map((event) => {
+                    return <LongEventCard customKey={event.id} event={event} />;
+                  })
+                ) : (
+                  <div className="flex justify-center w-full">
+                    <h1 className="text-white text-2xl text-center">
+                      Oops! No events found
+                    </h1>
+                  </div>
+                )}
+              </div>
+              <div className="flex overflow-x-auto justify-center sm:justify-center dark">
+                <Pagination
+                  previousLabel={"<"}
+                  nextLabel=">"
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={onPageChange}
+                />
+              </div>
+            </>
           </div>
         )}
       </div>
-    </>
+      {!auth?.accessToken && (
+        <div className="">
+          <Suspense fallback={<h2>Loading...</h2>}>
+            {modalOpen && (
+              <div className="fixed inset-0 backdrop-filter backdrop-blur-lg">
+                <LazyCustomModal
+                  modalOpen={modalOpen}
+                  handleOpenModal={handleOpenModal}
+                  handleCloseModal={handleCloseModal}
+                  categories={categories}
+                  setUserInterests={setUserInterests}
+                  userInterests={userInterests}
+                />
+              </div>
+            )}
+          </Suspense>
+        </div>
+      )}
+    </div>
   );
 };
 

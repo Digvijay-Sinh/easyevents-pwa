@@ -1,3 +1,4 @@
+import React from "react";
 import { Blurhash } from "react-blurhash";
 
 const CheckBg = () => {

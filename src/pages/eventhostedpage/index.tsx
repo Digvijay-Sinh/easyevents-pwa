@@ -1,12 +1,14 @@
-import { useParams } from "react-router-dom";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { useNavigate, useParams } from "react-router-dom";
+import posterImage from "../../assets/events/aleksandr-popov-hTv8aaPziOQ-unsplash.jpg";
+import { FaMapMarkerAlt, FaTimes } from "react-icons/fa";
 import { MdDateRange } from "react-icons/md";
 import { Button } from "flowbite-react";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { IoTimeSharp } from "react-icons/io5";
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useAuth } from "../../context/AuthProvider";
 import { axiosPrivate } from "../../api/axios";
 import Maps from "../demoApi/Maps";
 import { LatLngExpression } from "leaflet";
@@ -258,9 +260,9 @@ const EventHostedPage = () => {
           {" "}
           <span className="text-xs flex items-center gap-2 mb-1 md:text-sm text-gray-300 m-0">
             <IoTimeSharp className="text-yellow-300 text-base" />
-            Registration{" "}
-            {convertedEventDate(event?.start_date_toRegister as string)}-{" "}
-            {convertedEventDate(event?.end_date_toRegister as string)}
+            Registration {convertedEventDate(
+              event?.start_date_toRegister
+            )}- {convertedEventDate(event?.end_date_toRegister)}
           </span>
         </div>
       </div>
@@ -291,7 +293,7 @@ const EventHostedPage = () => {
             <div className="flex flex-col">
               {" "}
               <span className="text-sm   md:text-base text-white m-0">
-                {convertedEventDate(event?.start_date as string)}
+                {convertedEventDate(event?.start_date)}
               </span>
               {/* <span className="text-sm   md:text-base text-white m-0">
                 {event?.end_date}
@@ -301,7 +303,7 @@ const EventHostedPage = () => {
             <div className="flex flex-col">
               {" "}
               <span className="text-sm   md:text-base text-white m-0">
-                {convertedEventDate(event?.end_date as string)}
+                {convertedEventDate(event?.end_date)}
               </span>
               {/* <span className="text-sm   md:text-base text-white m-0">
                 15:21:00{" "}
@@ -341,8 +343,7 @@ const EventHostedPage = () => {
                   Tickets booked:
                 </p>
                 <p className="text-sm p-1 px-3 rounded-lg font-bold  bg-yellow-300  md:text-base text-black m-0">
-                  {(event?.capacity as number) -
-                    (event ? (event?.tickets_remaining as number) : 0)}
+                  {event?.capacity - event?.tickets_remaining}
                 </p>
               </div>
 
@@ -579,8 +580,6 @@ const EventHostedPage = () => {
             <tbody>
               {bookingData &&
                 bookingData.map((booking, i) => {
-                  console.log(booking);
-
                   return (
                     <tr className=" border  border-gray-700 ">
                       <th

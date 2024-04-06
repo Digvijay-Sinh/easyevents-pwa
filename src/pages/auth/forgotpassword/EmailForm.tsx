@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 type FormData = {
   email: string;

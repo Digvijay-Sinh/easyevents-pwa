@@ -2,17 +2,21 @@ import { Button } from "flowbite-react";
 // import { useState } from "react";
 // import toast from "react-hot-toast";
 import { IoCloseSharp } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { v4 as uuidv4 } from "uuid";
 import { useAuth } from "../context/AuthProvider";
 // import { axiosPrivate } from "../api/axios";
 // import { useHistory } from "react-router-dom";
 
 interface LazyCustomModalProps {
+  modalOpen: boolean;
+  handleOpenModal: () => void;
   handleCloseModal: () => void;
 }
 
 const AddEventModel: React.FC<LazyCustomModalProps> = ({
+  modalOpen,
+  handleOpenModal,
   handleCloseModal,
 }) => {
   const navigate = useNavigate();

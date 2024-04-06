@@ -1,9 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { Button } from "flowbite-react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Resolver, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
+import { FaCameraRetro } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { Event } from "../eventpage";
 import { axiosPrivate } from "../../api/axios";
@@ -21,7 +22,7 @@ type props = {
   event: Event;
 };
 
-// const MAX_IMAGE_SIZE_MB = 1; // Maximum image size allowed in MB
+const MAX_IMAGE_SIZE_MB = 1; // Maximum image size allowed in MB
 const SUPPORTED_IMAGE_TYPES = ["image/jpeg", "image/png"]; // Supported image types
 
 const schema = yup.object().shape({
@@ -67,12 +68,16 @@ type FormData = {
 };
 
 const EditEventForm22: React.FC<props> = ({
+  eventId,
   event,
-
+  showForm1,
+  showForm2,
+  showForm3,
   setShowForm4,
   setShowForm1,
   setShowForm2,
   setShowForm3,
+  showForm4,
 }) => {
   // const [selectedImage, setSelectedImage] = useState<File | null>(null);
   // const [imageError, setImageError] = useState<string | null>(null);
@@ -96,21 +101,28 @@ const EditEventForm22: React.FC<props> = ({
   //     }
   //   }
   // };
-  const { register, control, handleSubmit, formState, setValue, reset } =
-    useForm<FormData>({
-      defaultValues: {
-        speakers: [
-          {
-            name: "",
-            bio: "",
-            email: "",
-            organization: "",
-            image: null,
-          },
-        ],
-      },
-      resolver: yupResolver(schema) as Resolver<FormData>,
-    });
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState,
+    getValues,
+    setValue,
+    reset,
+  } = useForm<FormData>({
+    defaultValues: {
+      speakers: [
+        {
+          name: "",
+          bio: "",
+          email: "",
+          organization: "",
+          image: null,
+        },
+      ],
+    },
+    resolver: yupResolver(schema) as Resolver<FormData>,
+  });
 
   useEffect(() => {
     // Prepare speakers data for reset
@@ -210,7 +222,7 @@ const EditEventForm22: React.FC<props> = ({
     }
   };
 
-  const { fields } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     name: "speakers",
     control: control,
   });
@@ -275,8 +287,6 @@ const EditEventForm22: React.FC<props> = ({
               >
                 <div>
                   {fields.map((field, index) => {
-                    console.log(field);
-
                     return (
                       <>
                         <div className="sm:flex w-full">

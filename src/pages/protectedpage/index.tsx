@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthProvider";
+import React, { FC, useEffect } from "react";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { AuthData, useAuth } from "../../context/AuthProvider";
 
 // interface ProtectedPageProps {
 //   children: React.ReactNode;
 // }
 
 const ProtectedPage = () => {
-  const { auth } = useAuth();
+  const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
     if (!auth?.accessToken) {

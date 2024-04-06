@@ -10,7 +10,7 @@ const SignupForm = () => {
   const [showOtpScreen, setShowOtpScreen] = useState(false);
   const [showPasswordScreen, setShowPasswordScreen] = useState(false);
   const [otpTimerActive, setOtpTimerActive] = useState(false);
-  console.log(otpTimerActive);
+  const [timerDone, setTimerDone] = useState(false);
 
   return (
     <>

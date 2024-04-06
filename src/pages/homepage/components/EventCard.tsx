@@ -6,8 +6,6 @@ interface EventDetailsProps {
 }
 
 const EventCard: React.FC<EventDetailsProps> = ({ event, customKey }) => {
-  console.log(customKey);
-
   const convertedEventDate = (backendDate: string) => {
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 

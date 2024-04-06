@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 import { Button } from "flowbite-react";
@@ -11,9 +11,9 @@ const Nav = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  // const handleOpenModal = () => {
-  //   setModalOpen(true);
-  // };
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -149,7 +149,11 @@ const Nav = () => {
             <Suspense fallback={<h2>Loading...</h2>}>
               {modalOpen && (
                 <div className="fixed inset-0 backdrop-filter backdrop-blur-lg">
-                  <LazyCustomModal handleCloseModal={handleCloseModal} />
+                  <LazyCustomModal
+                    modalOpen={modalOpen}
+                    handleOpenModal={handleOpenModal}
+                    handleCloseModal={handleCloseModal}
+                  />
                 </div>
               )}
             </Suspense>

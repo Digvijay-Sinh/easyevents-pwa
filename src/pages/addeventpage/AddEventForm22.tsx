@@ -1,9 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { Button } from "flowbite-react";
-import React from "react";
+import React, { useState } from "react";
 import { Resolver, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
+import { FaCameraRetro } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 type props = {
@@ -19,7 +20,7 @@ type props = {
   setEventId: React.Dispatch<React.SetStateAction<number>>;
 };
 
-// const MAX_IMAGE_SIZE_MB = 1; // Maximum image size allowed in MB
+const MAX_IMAGE_SIZE_MB = 1; // Maximum image size allowed in MB
 const SUPPORTED_IMAGE_TYPES = ["image/jpeg", "image/png"]; // Supported image types
 
 const schema = yup.object().shape({
@@ -61,11 +62,15 @@ type FormData = {
 
 const AddEventForm22: React.FC<props> = ({
   eventId,
-
+  setEventId,
+  showForm1,
+  showForm2,
+  showForm3,
   setShowForm4,
   setShowForm1,
   setShowForm2,
   setShowForm3,
+  showForm4,
 }) => {
   // const [selectedImage, setSelectedImage] = useState<File | null>(null);
   // const [imageError, setImageError] = useState<string | null>(null);
@@ -89,20 +94,21 @@ const AddEventForm22: React.FC<props> = ({
   //     }
   //   }
   // };
-  const { register, control, handleSubmit, formState } = useForm<FormData>({
-    defaultValues: {
-      speakers: [
-        {
-          name: "",
-          bio: "",
-          email: "",
-          organization: "",
-          image: null,
-        },
-      ],
-    },
-    resolver: yupResolver(schema) as Resolver<FormData>,
-  });
+  const { register, control, handleSubmit, formState, getValues } =
+    useForm<FormData>({
+      defaultValues: {
+        speakers: [
+          {
+            name: "",
+            bio: "",
+            email: "",
+            organization: "",
+            image: null,
+          },
+        ],
+      },
+      resolver: yupResolver(schema) as Resolver<FormData>,
+    });
 
   const { errors } = formState;
 
@@ -221,8 +227,6 @@ const AddEventForm22: React.FC<props> = ({
               >
                 <div>
                   {fields.map((field, index) => {
-                    console.log(field);
-
                     return (
                       <>
                         <div className="sm:flex w-full">

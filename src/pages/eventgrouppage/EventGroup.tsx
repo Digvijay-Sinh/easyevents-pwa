@@ -1,30 +1,36 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from "react";
-// import { io } from "socket.io-client";
+import { io } from "socket.io-client";
 
 const MessagingPage: React.FC = () => {
   useEffect(() => {
-    // const socket = io("https://easyeventsbackend-pwa.onrender.com");
-    // socket.on("connect", () => {
-    //   console.log("Connected to server");
-    // });
+    const socket = io("https://easyeventsbackend-pwa.onrender.com");
+
+    socket.on("connect", () => {
+      console.log("Connected to server");
+    });
+
     // socket.on("disconnect", () => {
     //   console.log("Disconnected from server");
     // });
+
     // socket.on("message", (data: any) => {
     //   console.log("Message received:", data);
     // });
+
     // // Send a message
     // const sendMessage = () => {
     //   const message = "Hello, world!";
     //   socket.emit("message", message);
     // };
+
     // // Call the sendMessage function to send a message
     // sendMessage();
-    // // Clean up the socket connection
-    // return () => {
-    //   socket.disconnect();
-    // };
+
+    // Clean up the socket connection
+    return () => {
+      socket.disconnect();
+    };
   }, []);
   return (
     <div className="flex h-[85vh]">

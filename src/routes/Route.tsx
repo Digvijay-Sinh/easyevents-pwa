@@ -58,9 +58,10 @@
 
 // export default RouteContainer;
 
-import { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Loader from "../components/Loader";
+import EditEventForm from "../pages/editeventpage/EditEventForm";
 import EditEventPage from "../pages/editeventpage";
 import ForgotPasswordPage from "../pages/auth/forgotpassword";
 import EventHostedPage from "../pages/eventhostedpage";
@@ -81,6 +82,7 @@ const DemoApi = lazy(() => import("../pages/demoApi"));
 const ProtectedPage = lazy(() => import("../pages/protectedpage"));
 const SuccessPage = lazy(() => import("../pages/successpage"));
 const UserProfilePAge = lazy(() => import("../pages/userprofilepage"));
+const PaymentPage = lazy(() => import("../pages/paymentDemoPage"));
 
 const RouteContainer = () => {
   return (
@@ -106,6 +108,7 @@ const RouteContainer = () => {
         <Route path="/private" element={<PrivateRequestPage />} />
         <Route path="/checkBg" element={<CheckBg />} />
         <Route path="/demoapi" element={<DemoApi />} />
+        <Route path="/payment" element={<PaymentPage />} />
         {/* <Route
           path="/protected"
           element={

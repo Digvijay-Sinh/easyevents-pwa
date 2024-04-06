@@ -1,68 +1,29 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // import DemoAddEvent from "./DemoAddEvent";
 import EditEventForm from "./EditEventForm";
 import { useEffect, useState } from "react";
 import EditEventForm22 from "./EditEventForm22";
 import EditEventForm3 from "./EditEventForm3";
-import { Event } from "../eventpage/index";
+import {
+  Category,
+  Event,
+  Image,
+  Organizer,
+  Speaker,
+  Type,
+  Venue,
+} from "../eventpage/index";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 const EditEventPage = () => {
+  const navigate = useNavigate();
   // const [eventId, setEventId] = useState(0); // [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
   const [showForm1, setShowForm1] = useState(true);
   const [showForm2, setShowForm2] = useState(false);
   const [showForm3, setShowForm3] = useState(false);
   const [showForm4, setShowForm4] = useState(false);
-  const [event, setEvent] = useState<Event>({
-    id: 0,
-    title: "",
-    description: "",
-    start_date: "",
-    end_date: "",
-    start_date_toRegister: "",
-    end_date_toRegister: "",
-    mode: "",
-    capacity: 0,
-    tickets_remaining: 0,
-    price: 0,
-    organizer_id: 0,
-    venue_id: 0,
-    category_id: 0,
-    type_id: 0,
-    organizer: {
-      id: 0,
-      email: "",
-      name: "",
-      isAuthenticated: false,
-      googleId: null,
-      password: "",
-      refreshToken: "",
-    },
-    venue: {
-      id: 0,
-      name: "",
-      latitude: null,
-      longitude: null,
-      address: "",
-      city: "",
-      state: "",
-      country: "",
-      postcode: "",
-      google_place_id: "",
-    },
-    category: {
-      id: 0,
-      name: "",
-      image: "",
-    },
-    type: {
-      id: 0,
-      name: "",
-    },
-    speakers: [],
-    images: [],
-  });
+  const [event, setEvent] = useState<Event>();
 
   const eventId = parseInt(useParams().eventId as string);
 

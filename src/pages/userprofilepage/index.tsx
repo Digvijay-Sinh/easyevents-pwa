@@ -1,6 +1,9 @@
+import React from "react";
 import UserProfile from "./UserProfile";
 
-const UserProfilePAge = () => {
+type Props = {};
+
+const UserProfilePAge = (props: Props) => {
   return (
     <div>
       <UserProfile />
