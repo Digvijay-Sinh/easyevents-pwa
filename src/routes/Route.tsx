@@ -58,10 +58,10 @@
 
 // export default RouteContainer;
 
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Loader from "../components/Loader";
-import EditEventForm from "../pages/editeventpage/EditEventForm";
+// import EditEventForm from "../pages/editeventpage/EditEventForm";
 import EditEventPage from "../pages/editeventpage";
 import ForgotPasswordPage from "../pages/auth/forgotpassword";
 import EventHostedPage from "../pages/eventhostedpage";

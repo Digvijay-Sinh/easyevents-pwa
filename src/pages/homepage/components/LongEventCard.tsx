@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import { Event } from "../index";
 
-import { MdDateRange, MdEmail } from "react-icons/md";
+import { MdDateRange } from "react-icons/md";
 
 interface EventDetailsProps {
   event: Event;
   customKey: number;
 }
 
-const LongEventCard: React.FC<EventDetailsProps> = ({ event, customKey }) => {
+const LongEventCard: React.FC<EventDetailsProps> = ({ event }) => {
   const convertedEventDate = (backendDate: string) => {
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 

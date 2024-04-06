@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useState } from "react";
 
 type FormData = {
   name: string;
@@ -32,7 +31,6 @@ const EmailForm: React.FC<Props> = ({
   setOtpTimerActive,
   setShowOtpScreen,
 }) => {
-  const [name, setName] = useState("");
   const emailForm = useForm<FormData>({
     defaultValues: {
       name: "",

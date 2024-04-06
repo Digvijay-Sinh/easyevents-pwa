@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 // import SearchBox from "./SearchBox";
 import Maps from "./Maps";
 import { LatLngExpression } from "leaflet";
@@ -11,6 +11,10 @@ function DemoApi() {
   );
 
   const [searchAddress, setSearchAddress] = useState<PlaceData>();
+  useEffect(() => {
+    console.log(searchAddress);
+  }, [searchAddress]);
+
   const position: LatLngExpression = [23.03282845, 72.54671281964617];
 
   return (

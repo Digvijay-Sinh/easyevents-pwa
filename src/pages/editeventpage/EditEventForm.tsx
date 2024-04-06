@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { Button } from "flowbite-react";
-import React, { useEffect, useRef, useState, Dispatch } from "react";
+import React, { useEffect, useState } from "react";
 import { Resolver, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { MdAddBox } from "react-icons/md";
@@ -126,18 +126,13 @@ type props = {
 };
 
 const EditEventForm: React.FC<props> = ({
-  eventId,
   event,
-  showForm1,
-  showForm2,
-  showForm3,
+
   setShowForm4,
   setShowForm1,
   setShowForm2,
   setShowForm3,
-  showForm4,
 }) => {
-  const startDateRef = useRef<HTMLInputElement>(null);
   const [venues, setVenues] = useState<Venue[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [types, setTypes] = useState<Type[]>([]);
@@ -376,6 +371,10 @@ const EditEventForm: React.FC<props> = ({
 
   const [venueId, setVenueId] = useState("");
 
+  useEffect(() => {
+    console.log(venueId);
+  }, [venueId]);
+
   const [showAddVenueForm, setShowAddVenueForm] = useState(false);
   const {
     register,
@@ -472,6 +471,9 @@ const EditEventForm: React.FC<props> = ({
           end_date_toRegister: initialDatetime3.toISOString(),
         }
       );
+
+      console.log(response);
+
       toast.success("Step 1 completed successfully");
       setShowForm1(false);
       setShowForm2(true);
@@ -499,8 +501,8 @@ const EditEventForm: React.FC<props> = ({
         "https://easyeventsbackend-pwa.onrender.com/api/v1/venue",
         {
           ...data,
-          latitude: parseFloat(searchAddress?.lat),
-          longitude: parseFloat(searchAddress?.lon),
+          latitude: parseFloat(searchAddress?.lat as string),
+          longitude: parseFloat(searchAddress?.lon as string),
           postcode: searchAddress?.address.postcode,
         }
       );

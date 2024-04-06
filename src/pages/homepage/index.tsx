@@ -11,9 +11,7 @@ import SearchBar from "./components/SearchBar";
 import toast from "react-hot-toast";
 import CategoryCard from "./components/CategoryCard";
 import LongEventCard from "./components/LongEventCard";
-import Loader from "../../components/Loader";
 import { Pagination } from "flowbite-react";
-import { set } from "react-hook-form";
 
 const LazyCustomModal = lazy(() => import("./components/UserInterestModal"));
 
@@ -306,30 +304,6 @@ const HomePage = () => {
     };
   }, [auth]);
 
-  const dummyEvent = {
-    id: 2,
-    title: "ttrtrtrr",
-    description: "rtrtrrt",
-    start_date: "2024-03-09T13:24:00.000Z",
-    end_date: "2024-03-10T13:24:00.000Z",
-    start_date_toRegister: "2024-03-01T13:24:00.000Z",
-    end_date_toRegister: "2024-03-02T13:24:00.000Z",
-    mode: "ONLINE",
-    capacity: 333,
-    price: 33,
-    organizer_id: 1,
-    venue_id: 1,
-    category_id: 17,
-    type_id: 14,
-    images: [
-      {
-        id: 1,
-        poster_image: "image-1710768313757Untitled.png",
-        event_id: 2,
-      },
-    ],
-  };
-
   useEffect(() => {
     setModalOpen(true);
 
@@ -458,6 +432,8 @@ const HomePage = () => {
               swipeable
             >
               {categories?.map((category, index) => {
+                console.log(index);
+
                 if (category.image != "") {
                   return (
                     <div

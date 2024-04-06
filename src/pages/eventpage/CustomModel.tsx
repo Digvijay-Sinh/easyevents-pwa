@@ -19,10 +19,8 @@ interface LazyCustomModalProps {
 }
 
 const CustomModal: React.FC<LazyCustomModalProps> = ({
-  booked,
   setBooked,
-  modalOpen,
-  handleOpenModal,
+
   handleCloseModal,
   eventId,
   eventPrice,

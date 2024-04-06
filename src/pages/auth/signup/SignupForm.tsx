@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import formbg from "../../../assets/events/formbgfinal.jpg";
 import EmailForm from "./EmailForm";
 import OtpForm from "./OtpForm";
@@ -10,7 +10,9 @@ const SignupForm = () => {
   const [showOtpScreen, setShowOtpScreen] = useState(false);
   const [showPasswordScreen, setShowPasswordScreen] = useState(false);
   const [otpTimerActive, setOtpTimerActive] = useState(false);
-  const [timerDone, setTimerDone] = useState(false);
+  useEffect(() => {
+    console.log(otpTimerActive);
+  }, [otpTimerActive]);
 
   return (
     <>

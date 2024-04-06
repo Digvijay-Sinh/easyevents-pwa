@@ -1,17 +1,28 @@
-import React, { useState } from "react";
 import Datepicker from "react-tailwindcss-datepicker";
+
+interface DateRangeState {
+  startDate: string;
+  endDate: string;
+}
+interface props {
+  value: DateRangeState;
+  handleValueChange: (newValue: DateRangeState) => void;
+  placeholder: string;
+}
 // import "react-tailwindcss-datepicker/src/index.css";
 
-const DarkModeDatepicker = ({ value, handleValueChange, placeholder }) => {
-  const [darkMode, setDarkMode] = useState(true); // Default to dark mode
-
+const DarkModeDatepicker = ({
+  value,
+  handleValueChange,
+  placeholder,
+}: props) => {
   //   // Function to toggle dark mode
   //   const toggleDarkMode = () => {
   //     setDarkMode(!darkMode);
   //   };
 
   return (
-    <div className={darkMode ? "dark" : ""}>
+    <div className="dark">
       {/* <button onClick={toggleDarkMode}>
         {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
       </button> */}
@@ -23,7 +34,9 @@ const DarkModeDatepicker = ({ value, handleValueChange, placeholder }) => {
           startDate: value.startDate,
           endDate: new Date(value.endDate),
         }}
-        onChange={handleValueChange}
+        onChange={() => {
+          handleValueChange(value);
+        }}
       />
     </div>
   );

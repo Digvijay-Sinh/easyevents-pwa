@@ -1,10 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { Button } from "flowbite-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Resolver, useFieldArray, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { FaCameraRetro } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { Event } from "../eventpage";
 import { axiosPrivate } from "../../api/axios";
@@ -22,7 +21,6 @@ type props = {
   event: Event;
 };
 
-const MAX_IMAGE_SIZE_MB = 1; // Maximum image size allowed in MB
 const SUPPORTED_IMAGE_TYPES = ["image/jpeg", "image/png"]; // Supported image types
 
 const schema = yup.object().shape({
@@ -68,16 +66,12 @@ type FormData = {
 };
 
 const EditEventForm22: React.FC<props> = ({
-  eventId,
   event,
-  showForm1,
-  showForm2,
-  showForm3,
+
   setShowForm4,
   setShowForm1,
   setShowForm2,
   setShowForm3,
-  showForm4,
 }) => {
   // const [selectedImage, setSelectedImage] = useState<File | null>(null);
   // const [imageError, setImageError] = useState<string | null>(null);
@@ -106,7 +100,7 @@ const EditEventForm22: React.FC<props> = ({
     control,
     handleSubmit,
     formState,
-    getValues,
+
     setValue,
     reset,
   } = useForm<FormData>({
@@ -187,6 +181,7 @@ const EditEventForm22: React.FC<props> = ({
           console.log("====================================");
         } else {
           const { image, ...newResponse } = data.speakers[i];
+          console.log(image);
 
           const formSubmitResponse = await axiosPrivate.put(
             `https://easyeventsbackend-pwa.onrender.com/api/v1/speakers/${event.speakers[i].id}`,
@@ -222,7 +217,7 @@ const EditEventForm22: React.FC<props> = ({
     }
   };
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields } = useFieldArray({
     name: "speakers",
     control: control,
   });
@@ -287,6 +282,8 @@ const EditEventForm22: React.FC<props> = ({
               >
                 <div>
                   {fields.map((field, index) => {
+                    console.log(field);
+
                     return (
                       <>
                         <div className="sm:flex w-full">

@@ -25,18 +25,7 @@ type props = {
   event: Event;
 };
 
-const EditEventForm3: React.FC<props> = ({
-  eventId,
-  event,
-  showForm1,
-  showForm2,
-  showForm3,
-  setShowForm4,
-  setShowForm1,
-  setShowForm2,
-  setShowForm3,
-  showForm4,
-}) => {
+const EditEventForm3: React.FC<props> = ({ event }) => {
   // const { register, control, handleSubmit, formState } = useForm<FormData>({
   //   defaultValues: {
   //     speakers: [

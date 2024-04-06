@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 import { Button } from "flowbite-react";

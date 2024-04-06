@@ -1,23 +1,15 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // import DemoAddEvent from "./DemoAddEvent";
 import EditEventForm from "./EditEventForm";
 import { useEffect, useState } from "react";
 import EditEventForm22 from "./EditEventForm22";
 import EditEventForm3 from "./EditEventForm3";
-import {
-  Category,
-  Event,
-  Image,
-  Organizer,
-  Speaker,
-  Type,
-  Venue,
-} from "../eventpage/index";
+
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Event } from "../eventpage";
 
 const EditEventPage = () => {
-  const navigate = useNavigate();
   // const [eventId, setEventId] = useState(0); // [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
   const [showForm1, setShowForm1] = useState(true);
   const [showForm2, setShowForm2] = useState(false);
@@ -73,7 +65,7 @@ const EditEventPage = () => {
     if (showForm1 && !showForm2 && !showForm3 && !showForm4) {
       return (
         <EditEventForm
-          event={event}
+          event={event as Event}
           eventId={eventId}
           showForm1={showForm1}
           showForm2={showForm2}
@@ -89,7 +81,7 @@ const EditEventPage = () => {
     if (!showForm1 && showForm2 && !showForm3 && !showForm4) {
       return (
         <EditEventForm22
-          event={event}
+          event={event as Event}
           eventId={eventId}
           showForm1={showForm1}
           showForm2={showForm2}
@@ -106,7 +98,7 @@ const EditEventPage = () => {
       return (
         <EditEventForm3
           eventId={eventId}
-          event={event}
+          event={event as Event}
           showForm1={showForm1}
           showForm2={showForm2}
           showForm3={showForm3}

@@ -11,7 +11,6 @@ import { axiosPrivate } from "../../api/axios";
 import { LatLngExpression } from "leaflet";
 import Maps from "../demoApi/Maps";
 import SearchBox, { PlaceData } from "../demoApi/SearchBar";
-import { set } from "lodash";
 
 enum EventMode {
   OFFLINE = "OFFLINE",
@@ -127,16 +126,12 @@ type props = {
 };
 
 const AddEventForm: React.FC<props> = ({
-  eventId,
   setEventId,
-  showForm1,
-  showForm2,
-  showForm3,
+
   setShowForm4,
   setShowForm1,
   setShowForm2,
   setShowForm3,
-  showForm4,
 }) => {
   const [venues, setVenues] = useState<Venue[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -363,8 +358,8 @@ const AddEventForm: React.FC<props> = ({
         "https://easyeventsbackend-pwa.onrender.com/api/v1/venue",
         {
           ...data,
-          latitude: parseFloat(searchAddress?.lat),
-          longitude: parseFloat(searchAddress?.lon),
+          latitude: parseFloat(searchAddress?.lat as string),
+          longitude: parseFloat(searchAddress?.lon as string),
           postcode: searchAddress?.address.postcode,
         }
       );

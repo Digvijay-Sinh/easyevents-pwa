@@ -84,7 +84,7 @@ import {
   ReactNode,
 } from "react";
 
-interface AuthData {
+export interface AuthData {
   email: string;
 
   accessToken: string;

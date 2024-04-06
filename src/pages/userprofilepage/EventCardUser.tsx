@@ -6,27 +6,6 @@ import { Link } from "react-router-dom";
 // }
 
 const EventCard = () => {
-  const convertedEventDate = (backendDate: string) => {
-    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-    // Create a Date object from the backend date string
-    const utcDate = new Date(backendDate);
-
-    // Convert the date to the user's timezone
-    const userLocalDate = new Date(
-      utcDate.toLocaleString("en-US", { timeZone: userTimeZone })
-    );
-    console.log(userLocalDate);
-
-    // Get the time portion of the date
-    // const time = userLocalDate.toLocaleTimeString("en-US", {
-    //   hour: "numeric",
-    //   minute: "numeric",
-    //   hour12: true,
-    // });
-    // https://dv8rlqlr-5173.inc1.devtunnels.ms/
-    return `${userLocalDate.toDateString()}`;
-  };
   return (
     <>
       <Link to={`/event/876876`}>
